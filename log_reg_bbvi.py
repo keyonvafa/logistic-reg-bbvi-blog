@@ -14,7 +14,7 @@ def elbo_grad(z_sample, mu, sigma):
     score_mu = (z_sample - mu)/(sigma)
     score_logsigma = (-1/(2*sigma) + np.power((z_sample - mu),2)/(2*np.power(sigma,2))) * sigma
     log_p = np.sum(y * np.log(sigmoid(np.dot(X,z_sample))) + (1-y) * np.log(1-sigmoid(np.dot(X,z_sample))))\
-        + np.sum(norm.logpdf(z_sample, np.zeros(P), np.ones(P) * 1.0))
+        + np.sum(norm.logpdf(z_sample, np.zeros(P), np.ones(P)))
     log_q = np.sum(norm.logpdf(z_sample, mu, np.sqrt(sigma)))
     return np.concatenate([score_mu,score_logsigma])*(log_p - log_q)
 
